@@ -12,9 +12,6 @@
 
 using namespace std;
 
-// ============================================================================
-// LINEAR DATA STRUCTURES
-// ============================================================================
 
 template<typename T>
 class Node {
@@ -137,9 +134,6 @@ public:
     }
 };
 
-// ============================================================================
-// HIERARCHICAL DATA STRUCTURES
-// ============================================================================
 
 template<typename T>
 class TreeNode {
@@ -250,7 +244,6 @@ private:
     }
     
     shared_ptr<TreeNode<T>> insertAVL(shared_ptr<TreeNode<T>> node, T data) {
-        // Step 1: Perform normal BST insertion
         if (!node) {
             return make_shared<TreeNode<T>>(data);
         }
@@ -260,33 +253,27 @@ private:
         } else if (data > node->data) {
             node->right = insertAVL(node->right, data);
         } else {
-            return node; // Duplicate values not allowed
+            return node; 
         }
         
-        // Step 2: Update height
         node->height = max(getHeight(node->left), getHeight(node->right)) + 1;
         
-        // Step 3: Get balance factor
+      
         int balance = getBalance(node);
         
-        // Step 4: Perform rotations if needed
-        // Left Left Case
         if (balance > 1 && data < node->left->data) {
             return rotateRight(node);
         }
         
-        // Right Right Case
         if (balance < -1 && data > node->right->data) {
             return rotateLeft(node);
         }
         
-        // Left Right Case
         if (balance > 1 && data > node->left->data) {
             node->left = rotateLeft(node->left);
             return rotateRight(node);
         }
         
-        // Right Left Case
         if (balance < -1 && data < node->right->data) {
             node->right = rotateRight(node->right);
             return rotateLeft(node);
@@ -301,9 +288,6 @@ public:
     }
 };
 
-// ============================================================================
-// GRAPH DATA STRUCTURES
-// ============================================================================
 
 template<typename T>
 class Graph {
@@ -429,9 +413,6 @@ public:
     }
 };
 
-// ============================================================================
-// SORTING ALGORITHMS
-// ============================================================================
 
 class SortingAlgorithms {
 public:
@@ -528,9 +509,7 @@ private:
     }
 };
 
-// ============================================================================
-// SEARCH ALGORITHMS
-// ============================================================================
+
 
 class SearchAlgorithms {
 public:
@@ -561,9 +540,7 @@ public:
     }
 };
 
-// ============================================================================
-// DSA KNOWLEDGE GRAPH
-// ============================================================================
+
 
 struct ConceptInfo {
     string type;
@@ -578,7 +555,6 @@ private:
     Graph<string> relationships;
     
     void initializeKnowledgeBase() {
-        // Add concepts
         concepts["Array"] = {
             "Linear Data Structure",
             "A collection of elements stored at contiguous memory locations",
@@ -635,7 +611,6 @@ private:
             "O(1)"
         };
         
-        // Add relationships
         relationships.addEdge("Stack", "Array");
         relationships.addEdge("Queue", "Linked List");
         relationships.addEdge("Binary Search Tree", "Binary Tree");
@@ -691,13 +666,11 @@ public:
         file << "    rankdir=TB;" << endl;
         file << "    node [shape=box, style=filled, fillcolor=lightblue];" << endl;
         
-        // Add nodes with descriptions
         for (const auto& concept : concepts) {
             file << "    \"" << concept.first << "\" [label=\"" << concept.first 
                  << "\\n" << concept.second.type << "\"];" << endl;
         }
         
-        // Add edges (relationships)
         file << "    // Relationships" << endl;
         file << "    \"Stack\" -> \"Array\";" << endl;
         file << "    \"Queue\" -> \"Linked List\";" << endl;
@@ -751,7 +724,6 @@ public:
     void demonstrateAll() {
         cout << "\n=== DSA Knowledge Graph Demonstration ===" << endl;
         
-        // Demonstrate Stack
         cout << "\n1. Stack Operations:" << endl;
         Stack<int> stack;
         for (int i = 1; i <= 5; i++) {
@@ -762,7 +734,6 @@ public:
         cout << "   Popped: " << stack.pop() << endl;
         cout << "   Top element: " << stack.peek() << endl;
         
-        // Demonstrate Queue
         cout << "\n2. Queue Operations:" << endl;
         Queue<int> queue;
         for (int i = 1; i <= 5; i++) {
@@ -773,7 +744,6 @@ public:
         cout << "   Dequeued: " << queue.dequeue() << endl;
         cout << "   Front element: " << queue.getFront() << endl;
         
-        // Demonstrate Binary Tree
         cout << "\n3. Binary Tree Operations:" << endl;
         BinaryTree<int> bt;
         vector<int> treeData = {50, 30, 70, 20, 40, 60, 80};
@@ -786,7 +756,6 @@ public:
         bt.display();
         cout << "   Search 40: " << (bt.search(40) ? "Found" : "Not Found") << endl;
         
-        // Demonstrate Graph
         cout << "\n4. Graph Operations:" << endl;
         Graph<char> graph;
         vector<pair<char, char>> edges = {{'A', 'B'}, {'B', 'C'}, {'C', 'D'}, {'A', 'C'}, {'B', 'D'}};
@@ -805,7 +774,6 @@ public:
         for (char c : dfsResult) cout << c << " ";
         cout << endl;
         
-        // Demonstrate Sorting
         cout << "\n5. Sorting Algorithms:" << endl;
         vector<int> testArray = {64, 34, 25, 12, 22, 11, 90};
         cout << "   Original array: ";
@@ -823,7 +791,6 @@ public:
         for (int x : mergeSorted) cout << x << " ";
         cout << endl;
         
-        // Demonstrate Search
         cout << "\n6. Search Algorithms:" << endl;
         vector<int> sortedArray = {11, 12, 22, 25, 34, 64, 90};
         int target = 25;
@@ -838,7 +805,6 @@ public:
         cout << "   Linear search for " << target << ": Index " << linearResult << endl;
         cout << "   Binary search for " << target << ": Index " << binaryResult << endl;
         
-        // Knowledge Graph Search
         cout << "\n7. Knowledge Graph Search:" << endl;
         auto searchResults = searchConcepts("tree");
         cout << "   Search results for 'tree': " << searchResults.size() << " concepts found" << endl;
@@ -848,16 +814,12 @@ public:
     }
 };
 
-// ============================================================================
-// MAIN FUNCTION
-// ============================================================================
 
 int main() {
     try {
         DSAKnowledgeGraph kg;
         kg.demonstrateAll();
         
-        // Export visualization files
         kg.exportToGraphviz();
         kg.exportToJSON();
         

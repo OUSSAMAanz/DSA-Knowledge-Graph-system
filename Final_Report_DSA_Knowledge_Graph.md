@@ -176,7 +176,7 @@ The CMakeLists.txt file is a build configuration that:
 
 ---
 
-**Files Included:**
-- `README.md` - This documentation
+**Files Submitted:**
+- `Final_Report_DSA_Knowledge_Graph.md` - This report
 - `dsa_knowledge_graph.cpp` - Complete C++ implementation
 - `CMakeLists.txt` - Build configuration
